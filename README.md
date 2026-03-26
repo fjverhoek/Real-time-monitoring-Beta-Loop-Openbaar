@@ -19,10 +19,10 @@ You can do so by using the command:<br>
 _cd your/desired/path_ <br>
 Make sure that it's a local folder and not on the cloud or a networkdisk.
 
-3. Clone the repository into your desired folder with the command:<br>
+2. Clone the repository into your desired folder with the command:<br>
 _git clone https://github.com/FlorisJanVerhoek/Beta-Loop-Pipeline-Health_ <br>
-Close cmd<br>
-If you are encountering an error while cloning, see
+3. Close cmd<br>
+If you are encountering an error while cloning, see:
 
 [Troubleshooting](#troubleshooting)
 
@@ -70,7 +70,7 @@ In the log window at the bottom of the FEWS interface, check which port the webs
 Usually VS Code will suggest these by itself when opening the relevant files. If not, you can search for them under the Extensions tab (Ctrl+Shift+X).
 4. Setup the Python virtual environment (venv) by opening create-env.bat in the Scripts folder.<br>
 If Python modules are still missing you may have to manually install them using the command prompt. The command for this is:<br>
-_py -m pip install_<br>
+_py -m pip install_
 
 ## 7 Configuring the master script
 1. Navigate to the Scripts folder and open master_script.py in VS Code. 
