@@ -69,7 +69,7 @@ In the log window at the bottom of the FEWS interface, check which port the webs
 <br>
 Usually VS Code will suggest these by itself when opening the relevant files. If not, you can search for them under the Extensions tab (Ctrl+Shift+X).
 4. Setup the Python virtual environment (venv) by opening create-env.bat in the Scripts folder.<br>
-If Python modules are still missing you may have to manually install them using the command prompt. The command for this is:<br>
+If Python modules are still missing you may have to manually install them using the command prompt. The command for this is: <br>
 _py -m pip install_
 
 ## 7 Configuring the master script
@@ -89,7 +89,7 @@ Differential pressure (p_dp) is in [bar(a)].<br>
 Pump motor frequency (f) is in [Hz].<br>
 Relative deviation (percent) is in [%].<br>
 Absolute deviation (abs_dev) has no unit [-].<br>
-
+<br>
 2. Open VS Code and open the explorer (Ctrl+Shift+E). Click on Open Folder and navigate to <br>
 Beta-Loop-Pipeline-Health\FEWS\FEWS and choose the folder "Config".
 
@@ -117,7 +117,7 @@ You have to change the following files:
 ![parameters_files](https://i.imgur.com/MSmzV9d.png)
 
 **Parameters.xml**
-2. Add a parametergroup. You can leave <parameterType> as is.
+2. Add a parametergroup. You can leave \<parameterType> as is.
 
 ![parameters_xml](https://i.imgur.com/8LLJjb0.png)
 
@@ -126,17 +126,17 @@ You have to change the following files:
 
 ![locationSet_xml_attribute](https://i.imgur.com/6OmX8N0.png)
 
-4. …and a locationSet. You can leave <locationsetId> as is.
+4. …and a locationSet. You can leave \<locationsetId> as is.
 
 ![locationSet_xml_locationSet](https://i.imgur.com/UaYYoSM.png)
 
 **Filters.xml**
-5. For now, under <filter id="Data" name="Measurement Data"> add a timeSeriesSet. You only need to adjust <parameterId> and <locationSetId>.
+5. For now, under \<filter id="Data" name="Measurement Data"> add a timeSeriesSet. You only need to adjust \<parameterId> and \<locationSetId>.
 
 ![filters_xml](https://i.imgur.com/yaoRoPJ.png)
 
 **Import.xml (under ModuleConfigFiles)**
-6. Add a timeSeriesSet. You only need to adjust <parameterId> and <locationSetId>.
+6. Add a timeSeriesSet. You only need to adjust \<parameterId> and \<locationSetId>.
 
 ![Import_xml](https://i.imgur.com/FAKKHAh.png)
 
@@ -169,7 +169,7 @@ Type 3: Used for importing a timeseries to Wanda<br>
 To import a timeseries into a diagram, the action table and the initial value must be imported.<br>
 2. Change p0 (and p0_InitialQ) to the pressure sensor that is right before the pump in your configuration.
 3. Change p1 (and p1_InitialQ) to the pressure sensor that is right after the pump in your configuration.<br>
-For both of them you must change the <timeSeries id> and the <locationId>.
+For both of them you must change the \<timeSeries id> and the \<locationId>.
 
 ![Wanda_Prep](https://i.imgur.com/sT2EeTZ.png)
 
@@ -221,7 +221,7 @@ Here is an example of configuring a pressure sensor.
 ![configuring_pressure_sensor](https://i.imgur.com/O7dM2mx.mp4)
 
 ## 13 Setting up the Wanda workflow
-In order for the Wanda workflow to work, the modules must be configured so they handle your timeseries correctly. All the timeseries you are importing into Wanda (all the <importedVars>) must be resampled so Wanda can use them. All imported and exported timeseries must also be referred to correctly in the Wanda_Flow and Wanda_Full module.<br>
+In order for the Wanda workflow to work, the modules must be configured so they handle your timeseries correctly. All the timeseries you are importing into Wanda (all the \<importedVars>) must be resampled so Wanda can use them. All imported and exported timeseries must also be referred to correctly in the Wanda_Flow and Wanda_Full module.<br>
 <br>
 1. In VS Code, navigate to the Wanda folder, under ModuleConfigFiles. Open Wanda_Prep.xml first.
 
@@ -230,7 +230,7 @@ In order for the Wanda workflow to work, the modules must be configured so they 
 To perform a transformation on a timeseries, we must define the input, the output and the transformation we wish to do.
 2. For every timeseries you are importing make sure there is an input, an output and the correct transformation.
 
-The <moduleInstanceId> is the module where the timeseries originates from. In this case, that would be the Import module, where all measurement data is stored. ModuleInstanceIds are defined under WorkflowFiles. In the example configuration however, all moduleInstanceIds are the same as the file name of the xmls.<br>
+The \<moduleInstanceId> is the module where the timeseries originates from. In this case, that would be the Import module, where all measurement data is stored. ModuleInstanceIds are defined under WorkflowFiles. In the example configuration however, all moduleInstanceIds are the same as the file name of the xmls.<br>
 <br>
 The <timeSeriesType> is a value we have assigned to a timeseries. In this example, we only use three types: "external historical", "simulated historical" and "temporary". In general, you can put down all timeseries as "simulated historical", except those originating from the Import module. "temporary" timeseries are deleted after a workflow finishes, and will not show up in the FEWS GUI. You can read more about timeSeriesTypes on the FEWS wiki. 
 [FEWS Wiki - timeSeriesTypes](https://publicwiki.deltares.nl/spaces/FEWSDOC/pages/8683850/02+Data+Handling+in+Delft-FEWS#id-02DataHandlinginDelftFEWS-Typesoftimeseries)<br>
@@ -243,11 +243,11 @@ Below is an example showing how to add a pressure timeseries.
 
 ![Wanda_Full_location](https://i.imgur.com/LMO1mnS.png)
 
-4. Under <exportActivities> add a <timeSeriesSet> for all the timeseries you are exporting from FEWS into Wanda. These are the timeseries you have defined as <importedVars> in the dataConfig for Wanda_Full in step 12.6.
+4. Under \<exportActivities> add a \<timeSeriesSet> for all the timeseries you are exporting from FEWS into Wanda. These are the timeseries you have defined as \<importedVars> in the dataConfig for Wanda_Full in step 12.6.
 
 ![Wanda_Prep_xml](https://i.imgur.com/AClNWsj.png)
 
-5. Under <importActivities> (scroll down a bit) add a <timeSeriesSet> for all the timeseries you are importing from Wanda into FEWS. These are the timeseries you have defined as <exportedVars> in the dataConfig for Wanda_Full in step 12.6.
+5. Under \<importActivities> (scroll down a bit) add a \<timeSeriesSet> for all the timeseries you are importing from Wanda into FEWS. These are the timeseries you have defined as \<exportedVars> in the dataConfig for Wanda_Full in step 12.6.
 
 ![Wanda_Flow_xml](https://i.imgur.com/BsCvuLz.png)
 
@@ -261,7 +261,7 @@ The Berekeningen workflow is used to perform calculations on all the timeseries 
 ![Berekeningen_Prep_xml](https://i.imgur.com/7A9djAq.png)
 
 2. Here you must add an input, output and transformation. Just as in step 13.2.
-3. Repeat step 2 and 3 for Berekeningen.xml, but set up the transformation as you wish. The <user>, <simple> transformation can perform basic calculus (additions, multiplication etc). If you wish to do more, see the FEWS wiki [FEWS Wiki - Transformations](https://publicwiki.deltares.nl/spaces/FEWSDOC/pages/8684059/20+Transformation+Module+-+Improved+schema)
+3. Repeat step 2 and 3 for Berekeningen.xml, but set up the transformation as you wish. The \<user>, \<simple> transformation can perform basic calculus (additions, multiplication etc). If you wish to do more, see the FEWS wiki [FEWS Wiki - Transformations](https://publicwiki.deltares.nl/spaces/FEWSDOC/pages/8684059/20+Transformation+Module+-+Improved+schema)
 
 ![example_simple_transform](https://i.imgur.com/4x7ezNR.png)
 
@@ -271,10 +271,11 @@ In order for our timeseries to show up in FEWS, we must add them to the filter.
 
 ![Filters_xml_location](https://i.imgur.com/B8zhjVZ.png)
 
-2. Add your timeseries to the corresponding filter (in the example, these are <filter id="Data" name="Measurement Data">, <filter id="SimData" name="Simulated Data"> and <filter id="CalcData" name="Calculated Data">.
+2. Add your timeseries to the corresponding filter (in the example, these are \<filter id="Data" name="Measurement Data">, \<filter id="SimData" name="Simulated Data"> and \<filter id="CalcData" name="Calculated Data">.
 <br>
-You can choose to add a <locationId> or a <locationSetId>. A <locationId> will add a single locationId, while a <locationSetId> will add all locations under that set (as defined in locationSets.xml, under RegionConfigFiles).<br>
-For example, <locationSetId>locations_p</locationSetId> will add locations p0_BL, p1_BL, p2_BL, p3_BL and p4_BL.
+You can choose to add a &lt;locationId&gt; or a &lt;locationSetId&gt;. A &lt;locationId&gt; will add a single locationId, while a &lt;locationSetId&gt; will add all locations under that set (as defined in locationSets.xml, under RegionConfigFiles).
+
+For example, \<locationSetId>locations_p\</locationSetId> will add locations p0_BL, p1_BL, p2_BL, p3_BL and p4_BL.
 
 ![locationSetId](https://i.imgur.com/1B5MRGG.png)
 
